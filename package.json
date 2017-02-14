@@ -1,0 +1,15 @@
+{
+  "name": "telnetresume",
+  "version": "1.0.0",
+  "description": "A dumb thing where I render my resume using telnet",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Marcus Crane <marcus@thingsima.de>",
+  "license": "MIT",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "telnet2": "0.0.1"
+  }
+}
