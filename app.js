@@ -42,10 +42,15 @@ telnet({ tty: true }, (client) => {
                     break
                 // Change this to be return probably
                 case 6:
-                    updateScreen(mainmenu)
+                    updateScreen(contacts)
+                    break
+                case 7:
+                case 8:
+                case 9:
+                case 0:
                     break
                 default:
-                    console.log('Do nothing because that\'s not a valid option!')
+                    updateScreen(mainmenu)
                     break
             }
         }
@@ -80,8 +85,8 @@ telnet({ tty: true }, (client) => {
         parent: screen,
         left: 'center',
         top: 'center',
-        width: '75%',
-        height: '75%',
+        width: '95%',
+        height: '95%',
         border: 'line',
         content: mainmenu
     })
@@ -95,6 +100,7 @@ telnet({ tty: true }, (client) => {
 }).listen(2300)
 
 let mainmenu = `${resume.basics.name}
+
 ${resume.basics.label}
 ${resume.basics.location.city}, ${resume.basics.location.countryCode}
 
@@ -103,33 +109,87 @@ Press 2 for Skills
 Press 3 for Work Experience
 Press 4 for Education
 Press 5 for Publications
+Press 6 for Contact Details
 
 References available upon request
 `
 
-let bio = `${resume.basics.summary}
+let bio = `Personal Bio
+============
 
-Press 6 to go back!
+${resume.basics.summary}
+
+Press Return to go back
 `
 
-let skills = `${resume.skills[0].level} ${resume.skills[0].name}
+let skills = `Skills
+======
 
-Press 6 to go back!
+${resume.skills[0].name} - ${resume.skills[0].level}
+${resume.skills[0].keywords}
+
+${resume.skills[1].name} - ${resume.skills[1].level}
+${resume.skills[1].keywords}
+
+${resume.skills[2].name} - ${resume.skills[2].level}
+${resume.skills[2].keywords}
+
+${resume.skills[3].name} - ${resume.skills[3].level}
+${resume.skills[3].keywords}
+
+Press Return to go back
 `
 
-let work = `${resume.work[0].company}
+let work = `Work Experience
+===============
+
+${resume.work[0].position} @ ${resume.work[0].company}
+${resume.work[0].startDate} - ${resume.work[0].endDate}
 
 ${resume.work[0].summary}
 
-Press 6 to go back!
+${resume.work[1].position} @ ${resume.work[1].company}
+${resume.work[1].startDate} - ${resume.work[1].endDate}
+
+${resume.work[1].summary}
+
+Press Return to go back
 `
 
-let education = `${resume.education[0].institution}
+let education = `Education
+=========
 
-Press 6 to go back!
+Studied ${resume.education[0].area} at ${resume.education[0].institution}
+${resume.education[0].startDate} - ${resume.education[0].endDate}
+
+${resume.education[0].courses}
+
+Press Return to go back
 `
 
-let publications = `${resume.publications[0].summary}
+let publications = `Publications
+============
 
-Press 6 to go back!
+${resume.publications[0].name} published by ${resume.publications[0].publisher}
+
+${resume.publications[0].summary}
+
+Available at ${resume.publications[0].website}
+
+Press Return to go back
+`
+
+let contacts = `Contact Details
+===============
+
+Email: ${resume.basics.email}
+Phone: ${resume.basics.phone}
+
+Profiles
+========
+${resume.basics.profiles[0].network}: ${resume.basics.profiles[0].username}
+${resume.basics.profiles[1].network}: ${resume.basics.profiles[1].username}
+${resume.basics.profiles[2].network}: ${resume.basics.profiles[2].username}
+
+Press Return to go back
 `
