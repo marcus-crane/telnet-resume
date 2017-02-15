@@ -27,28 +27,22 @@ telnet({ tty: true }, (client) => {
             switch(parseInt(command)) {
                 case 1:
                     updateScreen(bio)
-                    screen.render()
                     break
                 case 2:
                     updateScreen(skills)
-                    screen.render()
                     break
                 case 3:
                     updateScreen(work)
-                    screen.render()
                     break
                 case 4:
                     updateScreen(education)
-                    screen.render()
                     break
                 case 5:
                     updateScreen(publications)
-                    screen.render()
                     break
                 // Change this to be return probably
                 case 6:
                     updateScreen(mainmenu)
-                    screen.render()
                     break
                 default:
                     console.log('Do nothing because that\'s not a valid option!')
