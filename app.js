@@ -22,28 +22,28 @@ telnet({ tty: true }, (client) => {
             switch(parseInt(command)) {
                 case 1:
                     // Just have a render function for each category
-                    screen.data.main.setContent('My bio would go here when this is finished. Press Return to go back!')
+                    updateScreen(bio)
                     screen.render()
                     break
                 case 2:
-                    screen.data.main.setContent('My skills would go here when this is finished. Press Return to go back!')
+                    updateScreen(skills)
                     screen.render()
                     break
                 case 3:
-                    screen.data.main.setContent('My work experience would go here when this is finished. Press Return to go back!')
+                    updateScreen(work)
                     screen.render()
                     break
                 case 4:
-                    screen.data.main.setContent('My education would go here when this is finished. Press Return to go back!')
+                    updateScreen(education)
                     screen.render()
                     break
                 case 5:
-                    screen.data.main.setContent('My publications would go here when this is finished. Press Return to go back!')
+                    updateScreen(publications)
                     screen.render()
                     break
                 // Change this to be return probably
                 case 6:
-                    screen.data.main.setContent(mainmenu)
+                    updateScreen(mainmenu)
                     screen.render()
                     break
                 default:
@@ -88,6 +88,11 @@ telnet({ tty: true }, (client) => {
         content: mainmenu
     })
 
+    const updateScreen = (content) => {
+        screen.data.main.setContent(content)
+        screen.render()
+    }
+
     screen.render()
 }).listen(2300)
 
@@ -103,4 +108,29 @@ Press 4 for Education
 Press 5 for Publications
 
 References available upon request
+`
+
+let bio = `My bio would go here when this is finished.
+
+Press 6 to go back!
+`
+
+let skills = `My skills would go here when this is finished.
+
+Press 6 to go back!
+`
+
+let work = `My work experience would go here when this is finished.
+
+Press 6 to go back!
+`
+
+let education = `My education would go here when this is finished.
+
+Press 6 to go back!
+`
+
+let publications = `My publications would go here when this is finished.
+
+Press 6 to go back!
 `
