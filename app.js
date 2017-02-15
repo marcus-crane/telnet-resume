@@ -1,5 +1,10 @@
 const blessed = require('blessed')
 const telnet = require('telnet2')
+const fs = require('fs')
+
+const resume = JSON.parse(fs.readFileSync('./resume.json', 'utf-8'))
+
+console.log('Listening on Port 2300')
 
 telnet({ tty: true }, (client) => {
     client.on('term', (terminal) => {
@@ -21,7 +26,6 @@ telnet({ tty: true }, (client) => {
         if (!isNaN(command)) {
             switch(parseInt(command)) {
                 case 1:
-                    // Just have a render function for each category
                     updateScreen(bio)
                     screen.render()
                     break
@@ -96,10 +100,9 @@ telnet({ tty: true }, (client) => {
     screen.render()
 }).listen(2300)
 
-// I could probably just parse the JSON resume I have instead of hardcoding text
-let mainmenu = `Marcus Crane
-Web Developer / Hobbyist Programmer
-Wellington, NZ
+let mainmenu = `${resume.basics.name}
+${resume.basics.label}
+${resume.basics.location.city}, ${resume.basics.location.countryCode}
 
 Press 1 for Bio
 Press 2 for Skills
@@ -110,27 +113,29 @@ Press 5 for Publications
 References available upon request
 `
 
-let bio = `My bio would go here when this is finished.
+let bio = `${resume.basics.summary}
 
 Press 6 to go back!
 `
 
-let skills = `My skills would go here when this is finished.
+let skills = `${resume.skills[0].level} ${resume.skills[0].name}
 
 Press 6 to go back!
 `
 
-let work = `My work experience would go here when this is finished.
+let work = `${resume.work[0].company}
+
+${resume.work[0].summary}
 
 Press 6 to go back!
 `
 
-let education = `My education would go here when this is finished.
+let education = `${resume.education[0].institution}
 
 Press 6 to go back!
 `
 
-let publications = `My publications would go here when this is finished.
+let publications = `${resume.publications[0].summary}
 
 Press 6 to go back!
 `
